@@ -1,0 +1,26 @@
+public class Solution {
+
+	public static LinkedListNode<Integer> kReverse(LinkedListNode<Integer> head, int k) {
+		//Your code goes here
+        if(k==0||k==1){
+            return head;
+        }
+        
+        LinkedListNode<Integer> current = head;
+        LinkedListNode<Integer> frwd = null;
+        LinkedListNode<Integer> prev = null;
+        
+        int count = 0;
+        
+        while(count<k && current!=null){
+            frwd = current.next;
+            current.next = prev;
+            prev = current;
+            current = frwd;
+            count++;
+        }
+        if(frwd!=null){
+            head.next = kReverse(frwd,k);
+        }
+        return prev;
+	}
